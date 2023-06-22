@@ -58,3 +58,40 @@ VALUES ('Tri Šešira', 'Skadarska 29'),
        ('Dva Jelena', 'Skadarska 32'),
        ('Stara Hercegovina', 'Džordža Vašingtona 19'),
        ('Tri Lista Duvana', 'Gospodar Jovanova 46');
+	   
+CREATE TABLE JELA (
+	ID_JELA SERIAL,
+	NAZIV VARCHAR(25) NOT NULL,
+	RESTORAN INTEGER NOT NULL,
+	CENA INTEGER NOT NULL,
+	OPIS TEXT,
+	PRIMARY KEY (ID_JELA),
+	FOREIGN KEY (RESTORAN) REFERENCES RESTORAN(ID_RESTORANA)
+);
+
+INSERT INTO JELA(NAZIV,RESTORAN,CENA,OPIS)
+VALUES
+    ('Ćevapi', 1, 500, 'Tradiconalno jelo sa ukusnim ćevapima.'),
+    ('Riblja čorba', 2, 700, 'Bogata riblja čorba sa svežim začinima.'),
+    ('Sarma', 3, 600, 'Mirisna sarma punjena mlevenim mesom i pirinčem.'),
+    ('Piletina sa kajmakom', 4, 750, 'Sočna piletina sa kajmakom i prilogom po izboru.'),
+    ('Pljeskavica', 5, 550, 'Velika pljeskavica sa odabranim dodacima po želji.'),
+    ('Punjene paprike', 6, 650, 'Slasne punjene paprike sa domaćom pavlakom.'),
+    ('Pasulj sa suvim mesom', 7, 500, 'Debela porcija pasulja sa ukusnim suvim mesom.'),
+    ('Karađorđeva šnicla', 8, 800, 'Mekana šnicla punjena kajmakom i panirana.'),
+    ('Burek', 9, 350, 'Hrskavi burek sa sirom ili mesom.'),
+    ('Gibanica', 10, 400, 'Mirisna gibanica sa sirom i korama sa domaćim filom.'),
+    ('Gurmanski sendvič', 1, 450, 'Sendvič sa svežim povrćem, suhomesnatim proizvodima i aromatičnim prelivom.'),
+    ('Čorba od pečuraka', 3, 350, 'Kremasta čorba od svežih pečuraka sa začinskim biljem.'),
+    ('Palačinke sa nutelom', 4, 300, 'Mekane palačinke sa ukusnom Nutellom i šlagom.'),
+    ('Plodovi mora pasta', 5, 900, 'Specijalitet od testenine sa bogatim sosom od plodova mora.'),
+    ('Roštilj mix', 6, 1200, 'Raznovrstan mix roštilja sa pečenim mesom i prilozima.'),
+    ('Kajgana sa slaninom', 7, 400, 'Sočna kajgana sa hrskavom slaninom i svežim začinima.'),
+    ('Morska riba na žaru', 8, 1500, 'Sveže ulovljena morska riba sa roštilja i garniturom po izboru.'),
+    ('Belo vino pileći file', 9, 850, 'Pečeni pileći file u belom vinu sa aromatičnim začinima i prilozima.'),
+    ('Teleća čorba', 2, 400, 'Bogata teleća čorba sa svežim povrćem i kockicama mesa.'),
+    ('Palačinke sa džemom', 10, 250, 'Slasne palačinke sa domaćim džemom po izboru.')	
+;
+
+SELECT * FROM JELA
+DROP TABLE JELA

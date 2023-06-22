@@ -39,4 +39,22 @@ VALUES ('ExpressDriver', '1234', 'Ivan Stojanović', 'Dostavljač', 'Bulevar Nik
 INSERT INTO KORISNIK (USERNAME, ŠIFRA, IME_PREZIME, TIP_KORISNIKA, ADRESA)
 VALUES ('ChocoLover', '1234', 'Jelena Petrović', 'Kupac', 'Karađorđeva 8');
 
+CREATE TABLE RESTORAN(
+	ID_RESTORANA SERIAL PRIMARY KEY,
+	NAZIV VARCHAR(25) NOT NULL,
+	ADRESA TEXT
+);
 
+SELECT * FROM RESTORAN
+
+INSERT INTO RESTORAN (NAZIV, ADRESA)
+VALUES ('Tri Šešira', 'Skadarska 29'),
+       ('Šaran', 'Ribarsko ostrvo'),
+       ('Zavičaj', 'Knez Mihailova 18'),
+       ('Vuk', 'Bulevar Mihajla Pupina 12'),
+       ('Dunav', 'Dunavska obala bb'),
+       ('Proleće', 'Karađorđeva 3'),
+       ('Stara Sokolova', 'Zlatiborska 12'),
+       ('Dva Jelena', 'Skadarska 32'),
+       ('Stara Hercegovina', 'Džordža Vašingtona 19'),
+       ('Tri Lista Duvana', 'Gospodar Jovanova 46');

@@ -44,7 +44,8 @@ class Gluvo:
 
     def add_to_basket(self, clan, password, nazivi_jela, kolicina, dostavljen = False):
         
-        filter_df = self.porudzbina_df[self.porudzbina_df["user_kupca"].str.contains(clan)]
+        # filter_df = self.porudzbina_df[self.porudzbina_df["user_kupca"].str.contains(clan)]
+        filter_df = self.porudzbina_df[self.porudzbina_df.user_kupca == clan]
 
         if self.log_in(clan, password) == "Kupac":#mozda i ne mora...OVO IDE U TKINTER.
                 if any(nazivi_jela[0] in item for item in filter_df["nazivi_jela"]):
@@ -67,18 +68,38 @@ class Gluvo:
                     self.con.commit()
                     cursor.close()
 
-    def in_the_bakset(self):
-        pass
-
     def delete_from_basket(self):
         pass
 
-    def order(self):
-        pass
+    def take_order(self,user_dostavljaca,id_porudzbine):
+        if id_porudzbine in self.porudzbina_df.id_porudzbine:
+            cursor = self.con.cursor()
+            taking_order = "UPDATE PORUDZBINA SET USER_DOSTAVLJACA = '{}' WHERE ID_PORUDZBINE = '{}'".format(
+                    user_dostavljaca, id_porudzbine)
+            cursor.execute(taking_order)
+            self.con.commit()
+            cursor.close()
+        else:
+            return ("Ne postoji odabrana narudžbina")
+        
+    def delivering(self,id_porudzbine,dostava = False):
+        if dostava == True:
+            cursor = self.con.cursor()
+            delivering_order = "UPDATE PORUDZBINA SET DOSTAVLJEN = '{}' WHERE ID_PORUDZBINE = '{}'".format(dostava, id_porudzbine)
+            cursor.execute(delivering_order)
+            self.con.commit()
+            cursor.close()
+        else:
+            return ("Ne postoji odabrana narudžbina")
+
+
+
 
     def export_basket_to_xlsx(self):
         pass
 
+    def test(self):
+        print(self.korisnik_df[self.korisnik_df.ime_prezime == "Dušan Blagojević"])
 
 dostavljanje = Gluvo()
 dostavljanje.import_sql()
@@ -87,5 +108,9 @@ dostavljanje.import_sql()
 # korisnik = dostavljanje.log_in("Punker", "1234")
 # print(dostavljanje.jela_df["naziv"])
 # print(dostavljanje.restoran_df)
-print(dostavljanje.add_to_basket("Lizi", "1234", ["Palacinke"],["2"]))
+# print(dostavljanje.add_to_basket("Punker", "1234", ["Magnolija"],["3"]))
+# print(dostavljanje.porudzbina_df)
 # print(dostavljanje.korisnik_df.tip_korisnika)
+# print(dostavljanje.test())
+# print(dostavljanje.take_order("Speedy",1))
+# print(dostavljanje.delivering(1,True))

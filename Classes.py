@@ -7,7 +7,6 @@ import tkinter as tk
 from tkinter import END
 import openpyxl
 
-
 class Gluvo:
     def __init__(self):
         self.con = pg.connect(database='Gluvo',
@@ -44,7 +43,6 @@ class Gluvo:
 
     def add_to_basket(self, clan, password, nazivi_jela, kolicina, dostavljen = False):
         
-        # filter_df = self.porudzbina_df[self.porudzbina_df["user_kupca"].str.contains(clan)]
         filter_df = self.porudzbina_df[self.porudzbina_df.user_kupca == clan]
 
         if self.log_in(clan, password) == "Kupac":#mozda i ne mora...OVO IDE U TKINTER.
@@ -68,7 +66,13 @@ class Gluvo:
                     self.con.commit()
                     cursor.close()
 
-    def delete_from_basket(self):
+    def order_excel(self,clan):
+
+        filter_df = self.porudzbina_df[self.porudzbina_df.user_kupca == clan]
+        file_name = str(filter_df['id_porudzbine'].values[0]) + '.xlsx'
+        filter_df.to_excel(file_name,index = False)
+
+    def delete_from_basket(self,user_kupca):
         pass
 
     def take_order(self,user_dostavljaca,id_porudzbine):
@@ -92,18 +96,9 @@ class Gluvo:
         else:
             return ("Ne postoji odabrana narudžbina")
 
-
-
-
-    def export_basket_to_xlsx(self):
-        pass
-
-    def test(self):
-        print(self.korisnik_df[self.korisnik_df.ime_prezime == "Dušan Blagojević"])
-
 dostavljanje = Gluvo()
 dostavljanje.import_sql()
-# print(dostavljanje.porudzbina_df)
+print(dostavljanje.porudzbina_df)
 # print(dostavljanje.porudzbina_df)
 # korisnik = dostavljanje.log_in("Punker", "1234")
 # print(dostavljanje.jela_df["naziv"])
